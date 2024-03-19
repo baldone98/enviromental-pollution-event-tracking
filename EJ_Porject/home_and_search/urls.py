@@ -21,8 +21,13 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path("homepage/", include("homepage.urls")),
+    path("", include("homepage.urls")),
     path("admin/", admin.site.urls),
 ]
 
+# urlpatterns = [
+#     path("homepage/", include("homepage.urls")),
+#     path("report/", include("homepage.urls")),
+#     path("admin/", admin.site.urls),
+# ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
