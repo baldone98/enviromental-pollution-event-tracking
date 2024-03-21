@@ -2,11 +2,157 @@
 <html>
 <head>
     <title>Environmental Pollution Event Tracking - Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        nav ul li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .button-container a {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .centered {
+            text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Report Page</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li>&gt;</li>
+            <li><a href="#">Search</a></li>
+        </ul>
+    </nav>
+    <div class="centered">
+        <h1 class="title">TN Pollution Report Center</h1>
+        <div class="button-container">
+            <a href="#" id="word-cloud-button">Word Cloud</a>
+            <a href="#" id="map-tracking-button">Map Tracking</a>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>News Title</th>
+                <th>News Link</th>
+                <th>Pollutant</th>
+                <th>Location/Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Insert fake data here -->
+            <tr>
+                <td>1</td>
+                <td>Sample News Title 1</td>
+                <td><a href="#">Sample Link 1</a></td>
+                <td>Water</td>
+                <td>Memphis</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Sample News Title 2</td>
+                <td><a href="#">Sample Link 2</a></td>
+                <td>Air</td>
+                <td>Nashville</td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>Sample News Title 3</td>
+                <td><a href="#">Sample Link 3</a></td>
+                <td>Soil</td>
+                <td>Valley City</td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>Sample News Title 4</td>
+                <td><a href="#">Sample Link 4</a></td>
+                <td>Noise</td>
+                <td>Memphis</td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td>Sample News Title 5</td>
+                <td><a href="#">Sample Link 5</a></td>
+                <td>Water</td>
+                <td>Jackson Valley</td>
+            </tr>
+
+            <tr>
+                <td>6</td>
+                <td>Sample News Title 6</td>
+                <td><a href="#">Sample Link 6</a></td>
+                <td>Noise</td>
+                <td>Memphis</td>
+            </tr>
+            <!-- Add more fake data -->
+        </tbody>
+    </table>
+    <div class="button-container">
+        <a href="#" id="save-button">Save/Export to File</a>
+        <a href="#" id="new-search-button">New Search</a>
+    </div>
 </body>
 </html>
-
-
-
