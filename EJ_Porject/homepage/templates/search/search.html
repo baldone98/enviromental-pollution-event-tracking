@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative; /* 使得页面底部按钮可以使用绝对定位 */
+        }
+        .nav-bar {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .module {
+            margin-right: 20px;
+            flex: 1 1 200px; /* 设置模块宽度 */
+        }
+        .module-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .checkbox {
+            margin-bottom: 5px;
+            vertical-align: middle; /* 让复选框的方框和文字垂直居中对齐 */
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 20px; /* 距离底部的距离 */
+            right: 20px; /* 距离右侧的距离 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="#">Back To Homepage</a> 
+        </div>
+        <h2>What would you like to know about the pollution in state Tennessee?</h2>
+        <div class="search-bar">
+            <input type="text" placeholder="Enter your search term">
+        </div>
+        <div class="module">
+            <h3 class="module-title">Pollution Terms</h3>
+            <div class="checkbox-group">
+                <input type="checkbox" class="checkbox" id="air"><label for="air">Air</label>
+                <input type="checkbox" class="checkbox" id="water"><label for="water">Water</label>
+                <input type="checkbox" class="checkbox" id="noise"><label for="noise">Noise</label>
+                <input type="checkbox" class="checkbox" id="waste"><label for="waste">Waste</label>
+            </div>
+        </div>
+        <div class="module">
+            <h3 class="module-title">Location</h3>
+            <select>
+                <option value="memphis">Memphis</option>
+                <option value="nashville">Nashville</option>
+                <option value="jackson">Jackson</option>
+                <option value="germantown">Germantown</option>
+            </select>
+        </div>
+        <div class="module">
+            <h3 class="module-title">Date</h3>
+            <input type="date" min="1900-01-01" max="2023-12-31">
+        </div>
+        <button class="button" onclick="window.location.href='/report/'">Go</button>
+    </div>
+</body>
+</html>

@@ -26,7 +26,7 @@ urlpatterns = [
 ]
 
 # urlpatterns = [
-#     path("homepage/", include("homepage.urls")),
+#     path("homepage/", include(s"homepage.urls")),
 #     path("report/", include("homepage.urls")),
 #     path("admin/", admin.site.urls),
 # ]

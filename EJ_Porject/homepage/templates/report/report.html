@@ -71,6 +71,8 @@
             font-size: 24px;
             margin-bottom: 20px;
         }
+
+        
     </style>
 </head>
 <body>
@@ -78,14 +80,16 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li>&gt;</li>
-            <li><a href="#">Search</a></li>
+            <li><a href="search.html">Search</a></li>
         </ul>
     </nav>
     <div class="centered">
         <h1 class="title">TN Pollution Report Center</h1>
         <div class="button-container">
-            <a href="#" id="word-cloud-button">Word Cloud</a>
-            <a href="#" id="map-tracking-button">Map Tracking</a>
+            
+            <button class="button" onclick="window.location.href='/wordcloud/'">Word Cloud</button>
+            <button class="button" onclick="window.location.href='/maptracking/'">Map Tracking</button>
+           
         </div>
     </div>
     <table>
@@ -152,7 +156,49 @@
     </table>
     <div class="button-container">
         <a href="#" id="save-button">Save/Export to File</a>
-        <a href="#" id="new-search-button">New Search</a>
+        <!-- <a href="#" id="new-search-button">New Search</a> > -->
+        <a href="search/search.html" id="new-search-button">New Search</a>
+
+        
     </div>
+
+    <script>
+        // 获取表格内容并转换为CSV格式
+        function convertToCSV(table) {
+            var rows = table.querySelectorAll("tr");
+            var csv = [];
+            for (var i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                for (var j = 0; j < cols.length; j++) {
+                    row.push(cols[j].innerText);
+                }
+                csv.push(row.join(","));
+            }
+            return csv.join("\n");
+        }
+
+        // 创建并下载CSV文件
+        function downloadCSV(csv, filename) {
+            var csvFile;
+            var downloadLink;
+
+            csvFile = new Blob([csv], { type: "text/csv" });
+            downloadLink = document.createElement("a");
+            downloadLink.download = filename;
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+        }
+
+        // 点击“Save/Export to File”按钮时触发下载CSV文件的操作
+        document.getElementById("save-button").addEventListener("click", function () {
+            var table = document.querySelector("table");
+            var csv = convertToCSV(table);
+            var filename = "pollution_report.csv";
+            downloadCSV(csv, filename);
+        });
+    </script>
+
 </body>
 </html>
