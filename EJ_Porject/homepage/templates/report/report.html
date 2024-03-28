@@ -163,7 +163,7 @@
     </div>
 
     <script>
-        // 获取表格内容并转换为CSV格式
+    
         function convertToCSV(table) {
             var rows = table.querySelectorAll("tr");
             var csv = [];
@@ -177,7 +177,7 @@
             return csv.join("\n");
         }
 
-        // 创建并下载CSV文件
+       
         function downloadCSV(csv, filename) {
             var csvFile;
             var downloadLink;
@@ -191,7 +191,7 @@
             downloadLink.click();
         }
 
-        // 点击“Save/Export to File”按钮时触发下载CSV文件的操作
+        
         document.getElementById("save-button").addEventListener("click", function () {
             var table = document.querySelector("table");
             var csv = convertToCSV(table);
