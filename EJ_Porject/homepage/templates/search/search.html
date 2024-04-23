@@ -93,5 +93,10 @@
         </div>
         <button class="button" onclick="window.location.href='/report/'">Go</button>
     </div>
+    <form method="POST" action="{% url 'fetch_articles' %}">
+        {% csrf_token %}
+        <input type="text" name="search_query" placeholder="Enter your search term">
+        <button type="submit">Search</button>
+    </form>
 </body>
 </html>

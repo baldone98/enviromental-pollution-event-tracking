@@ -103,56 +103,17 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Insert fake data here -->
+            {% for index, article in enumerate(articles) %}
             <tr>
-                <td>1</td>
-                <td>Sample News Title 1</td>
-                <td><a href="#">Sample Link 1</a></td>
-                <td>Water</td>
-                <td>Memphis</td>
+                <td>{{ index + 1 }}</td>
+                <td>{{ article }}</td>
+                <td><a href="{{ links[index] }}">{{ links[index] }}</a></td>
+                <td> <!-- Placeholder for pollutant data, replace with actual data if available --> </td>
+                <td> <!-- Placeholder for location/time data, replace with actual data if available --> </td>
             </tr>
-
-            <tr>
-                <td>2</td>
-                <td>Sample News Title 2</td>
-                <td><a href="#">Sample Link 2</a></td>
-                <td>Air</td>
-                <td>Nashville</td>
-            </tr>
-
-            <tr>
-                <td>3</td>
-                <td>Sample News Title 3</td>
-                <td><a href="#">Sample Link 3</a></td>
-                <td>Soil</td>
-                <td>Valley City</td>
-            </tr>
-
-            <tr>
-                <td>4</td>
-                <td>Sample News Title 4</td>
-                <td><a href="#">Sample Link 4</a></td>
-                <td>Noise</td>
-                <td>Memphis</td>
-            </tr>
-
-            <tr>
-                <td>5</td>
-                <td>Sample News Title 5</td>
-                <td><a href="#">Sample Link 5</a></td>
-                <td>Water</td>
-                <td>Jackson Valley</td>
-            </tr>
-
-            <tr>
-                <td>6</td>
-                <td>Sample News Title 6</td>
-                <td><a href="#">Sample Link 6</a></td>
-                <td>Noise</td>
-                <td>Memphis</td>
-            </tr>
-            <!-- Add more fake data -->
+            {% endfor %}
         </tbody>
+    </table>
     </table>
     <div class="button-container">
         <a href="#" id="save-button">Save/Export to File</a>
@@ -199,6 +160,7 @@
             downloadCSV(csv, filename);
         });
     </script>
+
 
 </body>
 </html>

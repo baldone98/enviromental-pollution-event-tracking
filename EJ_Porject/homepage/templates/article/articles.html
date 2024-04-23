@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Pollution Event Tracking - Articles</title>
+    <!-- Add any necessary CSS styles here -->
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Environmental Pollution Event Tracking - Articles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>News Title</th>
+                <th>News Link</th>
+                <th>Pollutant</th>
+                <th>Location/Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ article.title }}</td>
+                <td><a href="{{ article.link }}" target="_blank">{{ article.link }}</a></td>
+                <td>{{ article.pollutant }}</td>
+                <td>{{ article.location }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
