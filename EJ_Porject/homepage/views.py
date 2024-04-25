@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Query
 from GoogleNews import GoogleNews
+from ratelimit.decorators import ratelimit
+
 
 ###JKK
 import csv
@@ -26,19 +28,17 @@ def maptracking_view(request):
     return render(request, "maptracking/maptracking.html")
 
 
+@ratelimit(key='ip', rate='10/m', method='GET', block=True)
 def fetch_articles(request):
     googlenews = GoogleNews()
-    query_text = "air pollution breath Tennessee"
+    query = "air pollution breath Tennessee"
     articles_number = 200
     all_articles = []
     all_links = []
     page_num = 1
 
-    # Save the query to the database
-    query_obj = Query.objects.create(query_text=query_text)
-
     while len(all_articles) <= articles_number:
-        googlenews.search(query_text)
+        googlenews.search(query)
         articles = googlenews.get_texts()
         links = googlenews.get_links()
         all_articles.extend(articles)
@@ -50,6 +50,6 @@ def fetch_articles(request):
     # Save articles to CSV
     with open("articles.csv", "w") as f:
         for i in range(articles_number):
-            f.write(f'"{all_articles[i]}",{all_links[i]}\n')
+            f.write('"'+all_articles[i] +'"'+ "," + all_links[i] + "\n")
 
-    return render(request, 'article/articles.html', {'articles': all_articles, 'links': all_links})
+    return render(request, 'articles.html', {'articles': all_articles, 'links': all_links})
