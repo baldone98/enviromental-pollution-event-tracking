@@ -1,95 +1,85 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Environmental Pollution Event Tracking - Report</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        nav {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-        nav ul li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        nav ul li:last-child {
-            margin-right: 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .button-container a {
-            display: inline-block;
-            margin-left: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .centered {
-            text-align: center;
-        }
-        .title {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    nav {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+    }
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+    nav ul li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .centered {
+        text-align: center;
+    }
+    .title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="{% url 'index' %}">Home</a></li>
             <li>&gt;</li>
-            <li><a href="search.html">Search</a></li>
+            <li><a href="{% url 'search' %}">Search</a></li>
         </ul>
     </nav>
     <div class="centered">
         <h1 class="title">TN Pollution Report Center</h1>
         <div class="button-container">
-            
-            <button class="button" onclick="window.location.href='/wordcloud/'">Word Cloud</button>
-            <button class="button" onclick="window.location.href='/maptracking/'">Map Tracking</button>
-           
+            <button> Cloud</button> 
+            <button >Map Tracking</button>
         </div>
     </div>
     <table>
@@ -103,56 +93,27 @@
             </tr>
         </thead>
         <tbody>
-            {% for index, article in enumerate(articles) %}
-            <tr>
-                <td>{{ index + 1 }}</td>
-                <td>{{ article }}</td>
-                <td><a href="{{ links[index] }}">{{ links[index] }}</a></td>
-                <td> <!-- Placeholder for pollutant data, replace with actual data if available --> </td>
-                <td> <!-- Placeholder for location/time data, replace with actual data if available --> </td>
-            </tr>
-            {% endfor %}
+            {% block content %}
+              {% for article in articles %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{{ article.link }}" target="_blank">{{ article.title }}</a></td>
+                <td>{{ article.link }}</td>
+                <td>{# Add pollutant field if available in Article model #}</td>
+                <td>{{ article.location }}</td>
+              </tr>
+              {% empty %}
+              <tr><td colspan="5">No articles found.</td></tr>
+              {% endfor %}
+            {% endblock %}
         </tbody>
-    </table>
     </table>
     <div class="button-container">
         <a href="#" id="save-button">Save/Export to File</a>
-        <!-- <a href="#" id="new-search-button">New Search</a> > -->
-        <a href="search/search.html" id="new-search-button">New Search</a>
-
-        
+        <a href="{% url 'search' %}" id="new-search-button">New Search</a>
     </div>
 
     <script>
-    
-        function convertToCSV(table) {
-            var rows = table.querySelectorAll("tr");
-            var csv = [];
-            for (var i = 0; i < rows.length; i++) {
-                var row = [], cols = rows[i].querySelectorAll("td, th");
-                for (var j = 0; j < cols.length; j++) {
-                    row.push(cols[j].innerText);
-                }
-                csv.push(row.join(","));
-            }
-            return csv.join("\n");
-        }
-
-       
-        function downloadCSV(csv, filename) {
-            var csvFile;
-            var downloadLink;
-
-            csvFile = new Blob([csv], { type: "text/csv" });
-            downloadLink = document.createElement("a");
-            downloadLink.download = filename;
-            downloadLink.href = window.URL.createObjectURL(csvFile);
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-        }
-
-        
         document.getElementById("save-button").addEventListener("click", function () {
             var table = document.querySelector("table");
             var csv = convertToCSV(table);
@@ -160,7 +121,5 @@
             downloadCSV(csv, filename);
         });
     </script>
-
-
 </body>
 </html>

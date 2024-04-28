@@ -1,46 +1,22 @@
-<!DOCTYPE html>
-{% load static %}
-<html>
-<head>
-    <title>Welcome!</title>
-</head>
-<style>
-    body{
-        text-align: center;
-    }
 
-    * {
-        box-sizing: border-box;
-    }
 
-    .column {
-        float: left;
-        width: 33.33%;
-        padding: 5px;
-    }
-
-    .row::after{
-        content: "";
-        clear: both;
-        display: table;
-    }
-</style>
-<body>
-    <h1>Welcome to the Environmental Justice Center!</h1>
-
-    <div class="row">
-        <div class="column">
-            <img src="{% static 'homepage/images/placeholder_cloud.jpg' %}" alt="Word Cloud" style="width:400px;height:400px;margin-left: 100px;"/>
-        </div>
-        <div class="column">
-            <img src="{% static 'homepage/images/placeholder_state.png' %}" alt="State" style="width:300x;height:200px;margin-top:100px;margin-left: 100px;"/>
-        </div>
-    </div> 
-
-    <form action="{% url 'search' %}" method="get">
-        <button type="submit">Search</button>
-    </form>
-
-    <h2>facebook | ins | x | Youtube</h2>
-</body>
-</html>
+{% block content %}
+<div class="container">
+    <h1>Welcome to Our Environmental Justice Site</h1>
+    <p>
+        This site is dedicated to uncovering and discussing issues of environmental injustice
+        in Tennessee. We provide insights and news updates on how environmental decisions
+        impact different communities across the state, particularly focusing on how these
+        decisions affect marginalized and disadvantaged groups.
+    </p>
+    <p>
+        Our goal is to bring awareness to these critical issues and foster a community
+        that can advocate for fair and equitable environmental practices. Here, you can
+        find articles, analysis, and resources that help illuminate the challenges and
+        actions being taken to address environmental injustice.
+    </p>
+    <div>
+        <a href="{% url 'search' %}" class="btn btn-primary">Start your Search</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,55 +1,69 @@
-from django.shortcuts import render
-from django.template import loader
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.shortcuts import render
-from .models import Query
+from .models import SearchQuery
+import requests
 from GoogleNews import GoogleNews
-from ratelimit.decorators import ratelimit
+from django.shortcuts import render
+
+import xml.etree.ElementTree as ET
+googlenews = GoogleNews()
+from .models import SearchQuery, Article
 
 
-###JKK
-import csv
-import os
-#JKK###
 
-def index(request): 
+def index(request):
     return render(request, "homepage/index.html")
 
-def search_view(request):
-    return render(request, "search/search.html")
 
-def report_view(request):
-    return render(request, "report/report.html")
+def fetch_articles(request):
+    query = request.GET.get('q', '')
+    if not query:
+        return render(request, "search/search.html")
 
-def wordcloud_view(request):
+    # Append 'Tennessee' to ensure locality in the search
+    full_query = f"{query} Tennessee"
+
+    googlenews = GoogleNews(lang='en')
+    googlenews.search(full_query)
+    results = googlenews.result()
+
+    # Save results to database
+    for result in results:
+        Article.objects.get_or_create(title=result['title'], link=result['link'])
+
+    # Fetch all articles to display
+    articles = Article.objects.all()
+
+    return render(request, 'report/report.html', {'articles': articles})
+
+def search(request):
+    query = request.GET.get('q', '')
+    location = request.GET.get('location', '')
+    date = request.GET.get('date', '')
+
+    # Assuming Article model has fields to match these parameters
+    articles = Article.objects.filter(title__icontains=query, location__icontains=location)
+
+    return render(request, 'search/search.html', {'articles': articles})
+
+
+def wordcloud(request):
     return render(request, "wordcloud/wordcloud.html")
 
-def maptracking_view(request):
+def maptracking(request):
     return render(request, "maptracking/maptracking.html")
 
 
-@ratelimit(key='ip', rate='10/m', method='GET', block=True)
-def fetch_articles(request):
-    googlenews = GoogleNews()
-    query = "air pollution breath Tennessee"
-    articles_number = 200
-    all_articles = []
-    all_links = []
-    page_num = 1
 
-    while len(all_articles) <= articles_number:
-        googlenews.search(query)
-        articles = googlenews.get_texts()
-        links = googlenews.get_links()
-        all_articles.extend(articles)
-        all_links.extend(links)
-        googlenews.clear()
-        page_num += 1
-        articles_curr_page = googlenews.get_page(page_num)
-
-    # Save articles to CSV
-    with open("articles.csv", "w") as f:
-        for i in range(articles_number):
-            f.write('"'+all_articles[i] +'"'+ "," + all_links[i] + "\n")
-
-    return render(request, 'articles.html', {'articles': all_articles, 'links': all_links})
+def report(request):
+    search_query = request.GET.get('q', None)
+    if search_query:
+        # Retrieve the search query from the database
+        query = SearchQuery.objects.filter(query=search_query).first()
+        if query:
+            # Assuming you have a field named 'related_articles' in your SearchQuery model
+            related_articles = query.related_articles.all()
+            return render(request, 'report/report.html', {'articles': related_articles})
+    
+    # If search query not provided or not found in the database, render an empty template
+    return render(request, "report/report.html", )
