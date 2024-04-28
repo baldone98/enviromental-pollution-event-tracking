@@ -4,10 +4,14 @@ from .models import SearchQuery
 import requests
 from GoogleNews import GoogleNews
 from django.shortcuts import render
-
+import numpy as np
+from PIL import Image
+from io import BytesIO
+from wordcloud import WordCloud
 import xml.etree.ElementTree as ET
 googlenews = GoogleNews()
 from .models import SearchQuery, Article
+
 
 
 
@@ -47,8 +51,14 @@ def search(request):
     return render(request, 'search/search.html', {'articles': articles})
 
 
-def wordcloud(request):
-    return render(request, "wordcloud/wordcloud.html")
+
+def generate_word_cloud(request):
+    text = ' '.join(query.query for query in SearchQuery.objects.all())
+    wordcloud = WordCloud(width=800, height=400).generate(text)
+    response = HttpResponse(content_type="image/png")
+    image = wordcloud.to_image()
+    image.save(response, "PNG")
+    return response
 
 def maptracking(request):
     return render(request, "maptracking/maptracking.html")

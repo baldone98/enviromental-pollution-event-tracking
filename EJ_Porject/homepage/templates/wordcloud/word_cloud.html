@@ -25,11 +25,14 @@
 </style>
 <body>
 
-    <div class="row">
-        <div class="column">
-            <img src="{% static 'homepage/images/placeholder_cloud.jpg' %}" alt="Word Cloud" style="width:400px;height:400px;margin-left: 100px;"/>
-        </div>
-    </div> 
+    <!-- templates/word_cloud.html -->
+
+
+    {% block content %}
+  <h1>Search Query Word Cloud</h1>
+  <img src="{% url 'wordcloud' %}" alt="Word Cloud of Searches">
+    {% endblock %}
+
 
 </body>
 </html>
