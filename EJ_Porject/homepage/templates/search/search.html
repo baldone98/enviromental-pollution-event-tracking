@@ -6,38 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            position: relative; /* 使得页面底部按钮可以使用绝对定位 */
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://a.cdn-hotels.com/gdcs/production5/d1311/3af59bd7-0d47-4291-9ba0-c34803de7c54.jpg?impolicy=fcrop&w=1600&h=1066&q=medium');
+    background-size: cover; /* 使背景图适应屏幕 */
+    background-position: center; /* 将背景图居中 */
+    background-attachment: fixed; /* 固定背景图 */
+}
+
+.container {
+    max-width: 800px;
+    margin: auto; /* 将内容水平居中 */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8); /* 将原白色背景透明度调整为80% */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative; 
+}
+
         .nav-bar {
             margin-bottom: 20px;
             width: 100%;
+            font-family: sans-serif; /* 设置字体为 Arial 或者默认 sans-serif */
         }
         .search-bar {
             margin-bottom: 20px;
-            width: 100%;
+            width: calc(500% - 200px); 
         }
         .module {
             margin-right: 20px;
-            flex: 1 1 200px; /* 设置模块宽度 */
+            flex: 1 1 200px; 
         }
         .module-title {
             font-weight: bold;
             margin-bottom: 10px;
+            color: #005503; 
         }
         .checkbox-group {
             display: flex;
@@ -45,7 +53,7 @@
         }
         .checkbox {
             margin-bottom: 5px;
-            vertical-align: middle; /* 让复选框的方框和文字垂直居中对齐 */
+            vertical-align: middle; 
         }
         .button {
             padding: 10px 20px;
@@ -55,17 +63,22 @@
             border-radius: 5px;
             cursor: pointer;
             position: absolute;
-            bottom: 20px; /* 距离底部的距离 */
-            right: 20px; /* 距离右侧的距离 */
+            bottom: 20px; 
+            right: 20px; 
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="nav-bar">
+<<<<<<< HEAD
             <a href="{% url 'index' %}">Back To Homepage</a> <!-- Updated link -->
+=======
+            <!-- Words for local ONLY-->
+            <a href="http://127.0.0.1:8000/homepage/">Back To Homepage</a>
+>>>>>>> jiaqi_jacque_t
         </div>
-        <h2>What would you like to know about the pollution in state Tennessee?</h2>
+        <h2 style="color:white; background-color:#005503; padding:10px;">Pollution you'd like to know in State TN</h2>
         <div class="search-bar">
             <input type="text" placeholder="Enter your search term">
         </div>

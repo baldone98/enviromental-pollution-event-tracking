@@ -8,159 +8,362 @@
             margin: 0;
             padding: 0;
         }
-        nav {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
+
+        .container {
+            padding-left: 300px;
         }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
+
+        .table-wrapper {
+            overflow-x: hidden; 
+            margin-top: 50px; /* Add margin to separate the table from the sticky header */
         }
-        nav ul li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        nav ul li:last-child {
-            margin-right: 0;
-        }
+
         table {
-            width: 100%;
+            width: 100%; 
             border-collapse: collapse;
-            margin-top: 20px;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            color: #005503; 
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #005503;
+            color: white;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #8B4513;
+            color: white;
+            padding: 20px;
         }
-        tr:hover {
-            background-color: #ddd;
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
         }
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
+
+        .sidebar a:hover {
+            background-color: white;
+            color: #8B4513;
         }
-        .button-container a {
-            display: inline-block;
-            margin-left: 10px;
+
+        .save-button {
+            display: block;
+            margin-top: 320px; /* 调整按钮与其他链接之间的间距 */
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #005503;
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
-        .centered {
-            text-align: center;
-        }
-        .title {
-            font-size: 24px;
-            margin-bottom: 20px;
+
+        .save-button:hover {
+            background-color: #A0522D;
         }
 
+        /* Make the header sticky */
+        h1, th {
+            position: sticky;
+            top: 0;
+            background-color: #005503;
+            color: white;
+            z-index: 1; /* Ensure the header stays above other elements */
+        }
+        th {
+            position: sticky;
+            top: 0;
+            background-color: #005503;
+            z-index: 1;
         
+        }
+        td:nth-child(1) {
+        width: 20px; /* 设置Serial Number列的宽度为100像素 */
+        }
+
+        td:nth-child(2) {
+        width: 200px; 
+        }
+
+        td:nth-child(3) {
+        width: 50px; 
+        }
+
+        td:nth-child(4) {
+        width: 70px; 
+        }        
+
+        .filter-icon {
+        cursor: pointer;
+        padding-left: 5px;
+        }
+
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li>&gt;</li>
-            <li><a href="search.html">Search</a></li>
-        </ul>
-    </nav>
-    <div class="centered">
-        <h1 class="title">TN Pollution Report Center</h1>
-        <div class="button-container">
-            
-            <button class="button" onclick="window.location.href='/wordcloud/'">Word Cloud</button>
-            <button class="button" onclick="window.location.href='/maptracking/'">Map Tracking</button>
-           
+    <div class="container">
+        <div class="sidebar">
+            <h3>TN Pollution</h3>
+            <hr> <!-- 分隔线 -->
+            <a href="http://127.0.0.1:8000/login">My Profile</a>
+            <a href="http://127.0.0.1:8000/homepage/">Homepage</a>
+            <a href="http://127.0.0.1:8000/search/">New Search</a>
+            <a href="http://127.0.0.1:8000/wordcloud/">Word Cloud</a>
+            <a href="http://127.0.0.1:8000/maptracking">Map Tracking</a>
+            <a href="#">Log Out</a>
+            <a href="#" class="save-button" id="save-button">Save/Export to File</a> 
         </div>
+        <div class="table-wrapper">
+            <h1 style="color:white; background-color:#005503; padding:10px;">TN Pollution Report Center</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th> </th>
+                        <th>title<i class="fas fa-filter filter-icon"></i></th>
+                        <th>link<i class="fas fa-filter filter-icon"></i></th>
+                        <th>terms<i class="fas fa-filter filter-icon"></i></th>
+                        <th>keywords<i class="fas fa-filter filter-icon"></i></th>
+                        <th>cities<i class="fas fa-filter filter-icon"></i></th>
+                        <th>county<i class="fas fa-filter filter-icon"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Remnant T.S. Olga Wind Damage</td>
+                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
+                        <td>water, air</td>
+                        <td>air quality</td>
+                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
+                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>3</td>
+                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
+                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
+                        <td>air, waste</td>
+                        <td></td>
+                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
+                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
+                        <td>water, air, waste, soil</td>
+                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
+                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Tennessee accepting solid waste management grant applications</td>
+                        <td><a href="https://www.wastetodaymagazine.com/news/tenessee-accepting-applications-for-solid-waste-management-grants/">Link</a></td>
+                        <td></td>
+                        <td></td>
+                        <td>la follette</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Remnant T.S. Olga Wind Damage</td>
+                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
+                        <td>water, air</td>
+                        <td>air quality</td>
+                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
+                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
+                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
+                        <td>air, waste</td>
+                        <td></td>
+                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
+                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
+                        <td>water, air, waste, soil</td>
+                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
+                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Remnant T.S. Olga Wind Damage</td>
+                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
+                        <td>water, air</td>
+                        <td>air quality</td>
+                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
+                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>14</td>
+                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
+                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
+                        <td>air, waste</td>
+                        <td></td>
+                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
+                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
+                        <td>water, air, waste, soil</td>
+                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
+                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Tennessee accepting solid waste management grant applications</td>
+                        <td><a href="https://www.wastetodaymagazine.com/news/tenessee-accepting-applications-for-solid-waste-management-grants/">Link</a></td>
+                        <td></td>
+                        <td></td>
+                        <td>la follette</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Remnant T.S. Olga Wind Damage</td>
+                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
+                        <td>water, air</td>
+                        <td>air quality</td>
+                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
+                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>Short-term exposure to air pollution may increase stroke risk</td>
+                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
+                        <td>water, air</td>
+                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
+                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
+                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
+                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
+                        <td>air, waste</td>
+                        <td></td>
+                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
+                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
+                        <td>water, air, waste, soil</td>
+                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
+                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
+                        <td></td>
+                    </tr>                    
+                            
+    
+                    <!-- Add more fake data -->
+                </tbody>
+            </table>
+            <!--
+                <div class="button-container">
+                <a href="#" id="save-button">Save/Export to File</a>
+            </div>
+            </div>
+         <a href="#" class="save-button" id="save-button">Save/Export to File</a> 
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Serial Number</th>
-                <th>News Title</th>
-                <th>News Link</th>
-                <th>Pollutant</th>
-                <th>Location/Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Insert fake data here -->
-            <tr>
-                <td>1</td>
-                <td>Sample News Title 1</td>
-                <td><a href="#">Sample Link 1</a></td>
-                <td>Water</td>
-                <td>Memphis</td>
-            </tr>
+         -->
+            
 
-            <tr>
-                <td>2</td>
-                <td>Sample News Title 2</td>
-                <td><a href="#">Sample Link 2</a></td>
-                <td>Air</td>
-                <td>Nashville</td>
-            </tr>
-
-            <tr>
-                <td>3</td>
-                <td>Sample News Title 3</td>
-                <td><a href="#">Sample Link 3</a></td>
-                <td>Soil</td>
-                <td>Valley City</td>
-            </tr>
-
-            <tr>
-                <td>4</td>
-                <td>Sample News Title 4</td>
-                <td><a href="#">Sample Link 4</a></td>
-                <td>Noise</td>
-                <td>Memphis</td>
-            </tr>
-
-            <tr>
-                <td>5</td>
-                <td>Sample News Title 5</td>
-                <td><a href="#">Sample Link 5</a></td>
-                <td>Water</td>
-                <td>Jackson Valley</td>
-            </tr>
-
-            <tr>
-                <td>6</td>
-                <td>Sample News Title 6</td>
-                <td><a href="#">Sample Link 6</a></td>
-                <td>Noise</td>
-                <td>Memphis</td>
-            </tr>
-            <!-- Add more fake data -->
-        </tbody>
-    </table>
-    <div class="button-container">
-        <a href="#" id="save-button">Save/Export to File</a>
-        <!-- <a href="#" id="new-search-button">New Search</a> > -->
-        <a href="search/search.html" id="new-search-button">New Search</a>
-
-        
-    </div>
+         <label for="sort-by">Sort by:</label>
+         <select id="sort-by">
+             <option value="0">--Select--</option>
+             <option value="1">Title (A-Z)</option>
+             <option value="2">Title (Z-A)</option>
+             <option value="3">County (A-Z)</option>
+             <option value="4">County (Z-A)</option>
+         </select>
 
     <script>
     
@@ -198,7 +401,78 @@
             var filename = "pollution_report.csv";
             downloadCSV(csv, filename);
         });
+
+       
+
+
+    // Sort table function
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.querySelector("table");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                // Each time a switch is done, increase switchcount by 1:
+                switchcount++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+
+    // Add event listeners for sorting
+    document.addEventListener("DOMContentLoaded", function () {
+        var headers = document.querySelectorAll("th");
+        headers.forEach(function (header, index) {
+            header.addEventListener("click", function () {
+                sortTable(index);
+            });
+        });
+    });
+
     </script>
+
 
 </body>
 </html>
