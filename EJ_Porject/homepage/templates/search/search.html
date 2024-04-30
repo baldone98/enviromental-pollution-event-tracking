@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Page</title>
     <style>
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -40,6 +41,8 @@ body {
         }
         .module {
             margin-right: 20px;
+
+
             flex: 1 1 200px; 
         }
         .module-title {
@@ -53,6 +56,7 @@ body {
         }
         .checkbox {
             margin-bottom: 5px;
+
             vertical-align: middle; 
         }
         .button {
@@ -63,48 +67,47 @@ body {
             border-radius: 5px;
             cursor: pointer;
             position: absolute;
+
             bottom: 20px; 
             right: 20px; 
+
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="nav-bar">
-<<<<<<< HEAD
-            <a href="{% url 'index' %}">Back To Homepage</a> <!-- Updated link -->
-=======
-            <!-- Words for local ONLY
-            <a href="http://127.0.0.1:8000/homepage/">Back To Homepage</a>-->
->>>>>>> jiaqi_jacque_t
+            <a href="{% url 'index' %}">HomePage</a></li>
         </div>
-        <h2 style="color:white; background-color:#005503; padding:10px;">Pollution you'd like to know in State TN</h2>
-        <div class="search-bar">
-            <input type="text" placeholder="Enter your search term">
-        </div>
-        <div class="module">
-            <h3 class="module-title">Pollution Terms</h3>
-            <div class="checkbox-group">
-                <input type="checkbox" class="checkbox" id="air"><label for="air">Air</label>
-                <input type="checkbox" class="checkbox" id="water"><label for="water">Water</label>
-                <input type="checkbox" class="checkbox" id="noise"><label for="noise">Noise</label>
-                <input type="checkbox" class="checkbox" id="waste"><label for="waste">Waste</label>
+        <h2>What would you like to know about the pollution in Tennessee?</h2>
+        <form action="{% url 'fetch_articles' %}" method="get">
+                <input type="text" name="q" placeholder="Enter your search term" required>
+           
+        
+            <div class="module">
+                <h3 class="module-title">Pollution Terms</h3>
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox" id="air" name="air"><label for="air">Air</label>
+                    <input type="checkbox" class="checkbox" id="water" name="water"><label for="water">Water</label>
+                    <input type="checkbox" class="checkbox" id="noise" name="noise"><label for="noise">Noise</label>
+                    <input type="checkbox" class="checkbox" id="waste" name="waste"><label for="waste">Waste</label>
+                </div>
             </div>
-        </div>
-        <div class="module">
-            <h3 class="module-title">Location</h3>
-            <select>
-                <option value="memphis">Memphis</option>
-                <option value="nashville">Nashville</option>
-                <option value="jackson">Jackson</option>
-                <option value="germantown">Germantown</option>
-            </select>
-        </div>
-        <div class="module">
-            <h3 class="module-title">Date</h3>
-            <input type="date" min="1900-01-01" max="2023-12-31">
-        </div>
-        <button class="button" onclick="window.location.href='/report/'">Go</button>
+            <div class="module">
+                <h3 class="module-title">Location</h3>
+                <select name="location">
+                    <option value="memphis">Memphis</option>
+                    <option value="nashville">Nashville</option>
+                    <option value="jackson">Jackson</option>
+                    <option value="germantown">Germantown</option>
+                </select>
+            </div>
+            <div class="module">
+                <h3 class="module-title">Date</h3>
+                <input type="date" name="date" min="1900-01-01" max="2023-12-31">
+            </div>
+            <button type="submit" class="button">Search</button>
+        </form>
     </div>
 </body>
 </html>

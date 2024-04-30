@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Environmental Pollution Event Tracking - Report</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -108,6 +110,7 @@
         padding-left: 5px;
         }
 
+
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -141,220 +144,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>0</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Remnant T.S. Olga Wind Damage</td>
-                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
-                        <td>water, air</td>
-                        <td>air quality</td>
-                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
-                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
+                    <tbody>
+                        {% for article in articles %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ article.title }}</td>
+                            <td><a href="{{ article.link }}" target="_blank">Link</a></td>
+                            <td>{{ article.terms }}</td>
+                            <td>{{ article.keywords }}</td>
+                            <td>{{ article.cities }}</td>
+                            <td>{{ article.county }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="3">No articles found.</td></tr>
+                        {% endfor %}
+                    </tbody>
                     
-                    <tr>
-                        <td>3</td>
-                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
-                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
-                        <td>air, waste</td>
-                        <td></td>
-                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
-                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
-                        <td>water, air, waste, soil</td>
-                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
-                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Tennessee accepting solid waste management grant applications</td>
-                        <td><a href="https://www.wastetodaymagazine.com/news/tenessee-accepting-applications-for-solid-waste-management-grants/">Link</a></td>
-                        <td></td>
-                        <td></td>
-                        <td>la follette</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Remnant T.S. Olga Wind Damage</td>
-                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
-                        <td>water, air</td>
-                        <td>air quality</td>
-                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
-                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
-                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
-                        <td>air, waste</td>
-                        <td></td>
-                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
-                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
-                        <td>water, air, waste, soil</td>
-                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
-                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>Remnant T.S. Olga Wind Damage</td>
-                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
-                        <td>water, air</td>
-                        <td>air quality</td>
-                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
-                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>14</td>
-                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
-                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
-                        <td>air, waste</td>
-                        <td></td>
-                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
-                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
-                        <td>water, air, waste, soil</td>
-                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
-                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>16</td>
-                        <td>Tennessee accepting solid waste management grant applications</td>
-                        <td><a href="https://www.wastetodaymagazine.com/news/tenessee-accepting-applications-for-solid-waste-management-grants/">Link</a></td>
-                        <td></td>
-                        <td></td>
-                        <td>la follette</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>17</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
-                    <tr>
-                        <td>18</td>
-                        <td>Remnant T.S. Olga Wind Damage</td>
-                        <td><a href="https://www.weather.gov/ohx/20191026">Link</a></td>
-                        <td>water, air</td>
-                        <td>air quality</td>
-                        <td>ashland city, bell buckle, clarksville, columbia, cross plains, crossville, cumberland city, dickson, erin, fall branch, gallatin, hollow rock, johnson city, lake city, lawrenceburg, lebanon, lewisburg, linden, livingston, mc ewen, mc minnville, minor hill, murfreesboro, nashville, new johnsonville, new market, pleasant view, portland, pulaski, red boiling springs, shelbyville, smyrna, south fulton, sparta, tennessee ridge, troy, tullahoma, vanleer, waverly, white house</td>
-                        <td>Cheatham County, Bedford County, Montgomery County, Maury County, Robertson County, Cumberland County, Unknown, Unknown, Houston County, Unknown, Unknown, Carroll County, Washington County, Unknown, Lawrence County, Unknown, Marshall County, Perry County, Overton County, Unknown, Unknown, Unknown, Rutherford County, Davidson County, Humphreys County, Jefferson County, Cheatham County, Unknown, Unknown, Macon County, Bedford County, Rutherford County, Obion County, Unknown, Houston County, Obion County, Coffee County, Unknown, Humphreys County, Robertson County</td>
-                    </tr>
-                    <tr>
-                        <td>19</td>
-                        <td>Short-term exposure to air pollution may increase stroke risk</td>
-                        <td><a href="https://www.news-medical.net/news/20230927/Short-term-exposure-to-air-pollution-may-increase-stroke-risk.aspx">Link</a></td>
-                        <td>water, air</td>
-                        <td>drinking water, air pollution, pm2.5, pm10, sulfur dioxide, nitrogen dioxide, ozone, carbon monoxide</td>
-                        <td>bulls gap, church hill, gates, iron city, la follette, new johnsonville, pleasant view, red boiling springs, signal mountain, white bluff</td>
-                        <td>Hawkins County, Hawkins County, Lauderdale County, Unknown, Unknown, Humphreys County, Cheatham County, Macon County, Hamilton County, Unknown</td>
-                    </tr>
-                    <tr>
-                        <td>20</td>
-                        <td>I-40 reopens in Nashville following semi fire carrying radioactive waste</td>
-                        <td><a href="https://fox17.com/news/local/i-40-blocked-in-nashville-due-to-semi-fire-carrying-radioactive-waste">Link</a></td>
-                        <td>air, waste</td>
-                        <td></td>
-                        <td>gates, la follette, nashville, new johnsonville, pleasant view, red boiling springs, tennessee ridge, white bluff</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>21</td>
-                        <td>Memphis Still Endures Velsicol's Toxic Legacy | Memphis, TN Patch</td>
-                        <td><a href="https://patch.com/tennessee/memphis/memphis-still-endures-velsicols-toxic-legacy">Link</a></td>
-                        <td>water, air, waste, soil</td>
-                        <td>environmental protection, water quality, drinking water, industrial waste, hazardous waste</td>
-                        <td>ashland city, bell buckle, big sandy, brentwood, cedar hill, chattanooga, cross plains, erin, fall branch, franklin, hollow rock, huntsville, iron city, jackson, liberty, lookout mountain, memphis, nashville, new johnsonville, pleasant view, red boiling springs, south fulton, tennessee ridge, toone, white house</td>
-                        <td></td>
-                    </tr>                    
-                            
-    
-                    <!-- Add more fake data -->
                 </tbody>
-            </table>
-            <!--
-                <div class="button-container">
-                <a href="#" id="save-button">Save/Export to File</a>
-            </div>
-            </div>
-         <a href="#" class="save-button" id="save-button">Save/Export to File</a> 
-    </div>
-         -->
-            
+            </table
+
 
          <label for="sort-by">Sort by:</label>
          <select id="sort-by">
@@ -366,35 +174,6 @@
          </select>
 
     <script>
-    
-        function convertToCSV(table) {
-            var rows = table.querySelectorAll("tr");
-            var csv = [];
-            for (var i = 0; i < rows.length; i++) {
-                var row = [], cols = rows[i].querySelectorAll("td, th");
-                for (var j = 0; j < cols.length; j++) {
-                    row.push(cols[j].innerText);
-                }
-                csv.push(row.join(","));
-            }
-            return csv.join("\n");
-        }
-
-       
-        function downloadCSV(csv, filename) {
-            var csvFile;
-            var downloadLink;
-
-            csvFile = new Blob([csv], { type: "text/csv" });
-            downloadLink = document.createElement("a");
-            downloadLink.download = filename;
-            downloadLink.href = window.URL.createObjectURL(csvFile);
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-        }
-
-        
         document.getElementById("save-button").addEventListener("click", function () {
             var table = document.querySelector("table");
             var csv = convertToCSV(table);
@@ -472,7 +251,6 @@
     });
 
     </script>
-
 
 </body>
 </html>
