@@ -1,4 +1,63 @@
-<h1> this is a wordcloud page</h1>
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 50px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .column {
+            flex: 1;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Pollution Events Word Cloud </h1>
+    <div class="row">
+        <div class="column">
+            <img src="{% static 'homepage/images/placeholder_cloud.jpg' %}" alt="Word Cloud" style="width:400px;height:400px;margin-left: 100px;"/>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<!-- <h1> this is a wordcloud page</h1>
 
 {% load static %}
 <html>

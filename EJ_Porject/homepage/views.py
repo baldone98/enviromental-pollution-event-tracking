@@ -1,3 +1,4 @@
+import json  # Add this at the top of your file
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import SearchQuery
@@ -11,6 +12,7 @@ from wordcloud import WordCloud
 import xml.etree.ElementTree as ET
 googlenews = GoogleNews()
 from .models import SearchQuery, Article
+from datetime import datetime
 
 
 
@@ -20,33 +22,41 @@ def index(request):
 
 
 def fetch_articles(request):
-    query = request.GET.get('q', '')
-    if not query:
+    query_text = request.GET.get('q', '')
+    if not query_text:
         return render(request, "search/search.html")
 
-    # Append 'Tennessee' to ensure locality in the search
-    full_query = f"{query} Tennessee"
-
+    full_query = f"{query_text} Tennessee"
     googlenews = GoogleNews(lang='en')
     googlenews.search(full_query)
     results = googlenews.result()
+    search_query = SearchQuery.objects.create(
+        query=query_text,
+        results=json.dumps(results, default=str),  # Use a custom default to handle datetimes
+        searched_on=datetime.now()
+    )
 
-    # Save results to database
     for result in results:
-        Article.objects.get_or_create(title=result['title'], link=result['link'])
+        article, created = Article.objects.get_or_create(
+            title=result['title'],
+            link=result['link'],
+            defaults={
+                'terms': result.get('description', ''),
+                'keywords': result.get('meta_keywords', 'air,waste,water,noise'),
+                'cities': 'Tennessee',  # Assume all articles pertain to Tennessee for now
+                'county':result.get('location', '')  
+            }
+        )
+        search_query.articles.add(article)
 
-    # Fetch all articles to display
-    articles = Article.objects.all()
-
-    return render(request, 'report/report.html', {'articles': articles})
+    return redirect('report')
 
 def search(request):
     query = request.GET.get('q', '')
     location = request.GET.get('location', '')
-    date = request.GET.get('date', '')
-
-    # Assuming Article model has fields to match these parameters
-    articles = Article.objects.filter(title__icontains=query, location__icontains=location)
+    articles = Article.objects.filter(title__icontains=query)
+    if location:
+        articles = articles.filter(location__icontains=location)
 
     return render(request, 'search/search.html', {'articles': articles})
 
@@ -67,13 +77,12 @@ def maptracking(request):
 
 def report(request):
     search_query = request.GET.get('q', None)
+    articles = Article.objects.none()  # Start with no articles
     if search_query:
-        # Retrieve the search query from the database
         query = SearchQuery.objects.filter(query=search_query).first()
         if query:
-            # Assuming you have a field named 'related_articles' in your SearchQuery model
-            related_articles = query.related_articles.all()
-            return render(request, 'report/report.html', {'articles': related_articles})
-    
-    # If search query not provided or not found in the database, render an empty template
-    return render(request, "report/report.html", )
+            articles = query.articles.all()
+    else:
+        articles = Article.objects.all().order_by('-id')
+
+    return render(request, 'report/report.html', {'articles': articles})
